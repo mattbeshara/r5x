@@ -17,6 +17,9 @@
 
 import UIKit
 
-@main
-class AppDelegate: UIResponder, UIApplicationDelegate {}
-
+extension UIView {
+    public func constrain(_ closure: (UIView) -> [NSLayoutConstraint]) {
+        translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate(closure(self))
+    }
+}

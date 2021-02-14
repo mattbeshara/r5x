@@ -17,6 +17,23 @@
 
 import UIKit
 
-@main
-class AppDelegate: UIResponder, UIApplicationDelegate {}
+extension UIControl {
+    private class TapPublishSubject: PublishSubject<Void> {
+        override func observe(_ closure: @escaping (()) -> Void)
+        -> AnyObject {
+            super.observe { _ = self ; closure(()) }
+        }
 
+        @objc func tap() { send(()) }
+    }
+
+    public var onTap: PublishSubject<Void> {
+        with(TapPublishSubject()) {
+            addTarget(
+                $0,
+                action: #selector(TapPublishSubject.tap),
+                for: .touchUpInside
+            )
+        }
+    }
+}

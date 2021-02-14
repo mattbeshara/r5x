@@ -15,8 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with r5x.  If not, see <https://www.gnu.org/licenses/>.
 
-import UIKit
-
-@main
-class AppDelegate: UIResponder, UIApplicationDelegate {}
-
+public func with<T>(_ it: T, _ closure: (T) -> Void) -> T where T: AnyObject {
+    closure(it)
+    return it
+}
